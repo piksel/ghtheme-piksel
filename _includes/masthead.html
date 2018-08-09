@@ -9,13 +9,13 @@
  <div class="masthead__inner-wrap">
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
-       <a class="site-title" href="{{ "/" | relative_url }}">dev.p1k.se</a>
+       <a class="site-title" href="/">dev.p1k.se</a>
     {%- if is_main -%}
         {%- assign default_paths = site.pages | map: "path" -%}
         {%- assign page_paths = site.header_pages | default: default_paths -%}
     {%- else -%}
         <span class="site-title"> / </span>
-        <a class="site-title" href="{{ site.url }}">{{ site.title | escape }}</a>
+        <a class="site-title" href="{{ site.github.url }}">{{ site.title | escape }}</a>
     {%- endif -%}
 
         <ul class="visible-links">
