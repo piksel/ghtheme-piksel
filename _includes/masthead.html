@@ -1,20 +1,47 @@
+{%- assign is_main = site.github.repository_name == "piksel.github.io" -%}
 <div class="masthead">
-  <div class="masthead__inner-wrap">
+       </div>
+     </nav>
+ <div class="masthead__inner-wrap">
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
-        <a class="site-title" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+       <a class="site-title" href="{{ "/" | relative_url }}">dev.p1k.se</a>
+    {%- if is_main -%}
+        {%- assign default_paths = site.pages | map: "path" -%}
+        {%- assign page_paths = site.header_pages | default: default_paths -%}
+    {%- else -%}
+        <span class="site-title"> / </span>
+        <a class="site-title" href="{{ site.url }}">{{ site.title | escape }}</a>
+    {%- endif -%}
+
         <ul class="visible-links">
-          {% for link in site.data.navigation.main %}
-            {% if link.url contains 'http' %}
-              {% assign domain = '' %}
-            {% else %}
-              {% assign domain = site.url | append: site.baseurl %}
-            {% endif %}
-            <li class="masthead__menu-item">
-              <a href="{{ domain }}{{ link.url }}" {% if link.description %}title="{{ link.description }}"{% endif %}>{{ link.title }}</a>
-            </li>
+         {%- if is_main -%}
+            {% for repo_name in site.data.navigation.ghrepos %}
+                {%- assign repo = site.github.public_repositories | where: "repository_name", repo_name | first -%}
+                <li class="masthead__menu-item">
+                    <a href="/{{ repo_name }}" title="{{ repo.project_tagline }}">{{ repo_name }}</a>
+                </li>
           {% endfor %}
-        </ul>
+
+         {%- else -%}
+            {%- if site.github.latest_release -%}
+              <li class="masthead__menu-item">
+          <a class="page-link" href="{{site.github.latest_release.html_url}}">Download {{site.github.latest_release.tag_name}}</a>
+              </li>
+            {%- endif -%}
+            {%- if docs_url -%}
+               <li class="masthead__menu-item">
+         <a class="page-link" href="{{site.url | append: docs_url}}" title="Documentation">Docs</a>
+               </li>
+            {%- endif -%}
+                <li class="masthead__menu-item">
+        <a class="page-link" href="{{site.github.zip_url}}">Source (zip)</a> 
+                </li>
+                 <li class="masthead__menu-item">
+       <a class="page-link" href="{{site.github.repository_url}}">Github</a>
+                 </li>
+        {%- endif -%}
+                 </ul>
         {% if site.search == true %}
         <button class="search__toggle" type="button">
           <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
