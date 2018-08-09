@@ -21,3 +21,17 @@ $navicon-link-color-hover: mix(#fff, $text-color, 80%) !default;
 .page__footer-follow .social-icons .svg-inline--fa {
   color: inherit;
 }
+
+
+
+.greedy-nav {
+    a.site-title, span.site-title {
+        margin-right: 0;
+    }
+    span.site-title {
+        color: $muted-text-color;
+        font-size: 1.5em;
+        font-weight: 300;
+        line-height: 1em;
+    }
+}
