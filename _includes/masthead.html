@@ -1,4 +1,8 @@
-{%- assign is_main = site.github.repository_name == "piksel.github.io" -%}
+{%- if site.github.repository_name == "piksel.github.io" -%}
+{%- assign is_main = true -%}
+{%- else -%}
+{%- assign is_main = false -%}
+{%- endif -%}
 <div class="masthead">
        </div>
      </nav>
